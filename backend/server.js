@@ -3,44 +3,68 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+// استدعاء نموذج المشاركات
+const Post = require('./models/Post');
+
 // إنشاء تطبيق Express
 const app = express();
 
-// إضافة الميدلويرز
+// استخدام الميدلويرز
 app.use(cors());
 app.use(express.json());
 
-// الاتصال بقاعدة بيانات MongoDB عبر البيئة
+// الاتصال بقاعدة MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 })
-  .then(() => console.log('✅ MongoDB connected'))
-  .catch((err) => console.error('❌ MongoDB connection error:', err));
+.then(() => console.log('✅ MongoDB connected'))
+.catch((err) => console.error('❌ MongoDB connection error:', err));
 
-// مسار رئيسي للتأكد من اشتغال السيرفر
+// مسار اختبار السيرفر
 app.get('/', (req, res) => {
   res.send('🚀 Server is live and healthy!');
 });
 
-// تحديد المنفذ الديناميكي (يُستخدم في Render)
-const PORT = process.env.PORT || 3000;
-app.get('/api/posts', (req, res) => {
-  res.json([
-    { title: "مقال أول", description: "وصف المقال الأول من السيرفر" },
-    { title: "مقال ثاني", description: "تفاصيل المقال الثاني هنا" }
-  ]);
-});
-// تشغيل السيرفر
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});const Post = require('./models/Post');
-
+// ✅ مسار جلب المشاركات من MongoDB
 app.get('/api/posts', async (req, res) => {
   try {
     const posts = await Post.find();
     res.json(posts);
   } catch (err) {
     res.status(500).json({ message: 'خطأ في جلب المشاركات من قاعدة البيانات' });
+  }
+});
+
+// ✅ مسار إنشاء مشاركة جديدة في MongoDB
+app.post('/api/posts', async (req, res) => {
+  try {
+    const { title, description } = req.body;
+    const newPost = new Post({ title, description });
+    await newPost.save();
+    res.status(201).json(newPost);
+  } catch (err) {
+    res.status(400).json({ message: '❌ فشل في حفظ المشاركة' });
+  }
+});
+
+// تحديد المنفذ الديناميكي
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});const users = [
+  { email: "admin@example.com", password: "123456" }, // مستخدم تجريبي
+];
+
+// ✅ مسار تسجيل الدخول
+app.post('/api/auth/login', (req, res) => {
+  const { email, password } = req.body;
+
+  const user = users.find(u => u.email === email && u.password === password);
+
+  if (user) {
+    res.json({ message: '✅ تسجيل دخول ناجح', user: { email } });
+  } else {
+    res.status(401).json({ message: '❌ بيانات غير صحيحة' });
   }
 });
