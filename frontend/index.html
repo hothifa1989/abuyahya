@@ -2,36 +2,44 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>تسجيل الدخول - إدارة السائقين</title>
+  <title>تسجيل الدخول - شركة أبو يحيى للنقليات</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #74ebd5, #9face6);
+      background: url('./R6LAor1hiunwBoyjGBfze.jpeg') no-repeat center center fixed;
+      background-size: cover;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       margin: 0;
-      color: #2c3e50;
+      color: #ffffff;
     }
     h1 {
       font-size: 2.5em;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px 20px;
+      border-radius: 10px;
     }
     form {
-      background: #fff;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
       padding: 20px;
       border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
       width: 300px;
     }
     input {
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
-      border: 1px solid #ccc;
+      border: none;
       border-radius: 8px;
+      background: #ffffff;
+      color: #000;
     }
     button {
       background: #3498db;
@@ -48,16 +56,22 @@
     #message {
       margin-top: 20px;
       font-weight: bold;
+      text-align: center;
+      background-color: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>🚗 شركة ابو يحيى للنقليات</h2>
+  <h1>🚛 شركة أبو يحيى للنقليات</h1>
+
   <form id="loginForm">
     <input type="email" id="email" placeholder="البريد الإلكتروني" required>
     <input type="password" id="password" placeholder="كلمة المرور" required>
     <button type="submit">تسجيل الدخول</button>
   </form>
+
   <div id="message"></div>
 
   <script>
@@ -77,11 +91,17 @@
         const data = await res.json();
 
         if (res.ok) {
-  document.getElementById('message').innerText = '✅ تم تسجيل الدخول بنجاح... جاري تحويلك';
-  setTimeout(() => {
-    window.location.href = "dashboard.html"; // أو أي صفحة رئيسية عندك
-  }, 2000); // بعد 2 ثانية
-}
+          document.getElementById('message').innerText = '✅ تم تسجيل الدخول بنجاح... جاري تحويلك';
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 2000);
+        } else {
+          document.getElementById('message').innerText = data.message || '❌ بيانات الدخول غير صحيحة';
         }
       } catch (err) {
         document.getElementById('message').innerText = '⚠️ خطأ في الاتصال بالخادم';
+      }
+    });
+  </script>
+</body>
+</html>
