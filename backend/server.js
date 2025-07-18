@@ -25,7 +25,12 @@ app.get('/', (req, res) => {
 
 // تحديد المنفذ الديناميكي (يُستخدم في Render)
 const PORT = process.env.PORT || 3000;
-
+app.get('/api/posts', (req, res) => {
+  res.json([
+    { title: "مقال أول", description: "وصف المقال الأول من السيرفر" },
+    { title: "مقال ثاني", description: "تفاصيل المقال الثاني هنا" }
+  ]);
+});
 // تشغيل السيرفر
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
