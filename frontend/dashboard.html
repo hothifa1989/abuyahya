@@ -1,160 +1,173 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <title>لوحة السائقين</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>لوحة التحكم - شركة أبو يحيى للنقليات</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* تصميم كامل (لم يتغير لأنك عامل شغل فني ممتاز) */
     body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('./background.jpg') no-repeat center center fixed;
+      background-size: cover;
       margin: 0;
       padding: 0;
-      font-family: 'Cairo', sans-serif;
-      background-image: url('background.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 100vh;
-      overflow: auto;
-    }
-    .container {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 30px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.3);
       color: #fff;
     }
-    h1 {
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
       text-align: center;
-      margin-bottom: 25px;
-      text-shadow: 0 0 3px #000;
-    }
-    .field { margin-bottom: 15px; }
-    label { display: block; margin-bottom: 6px; font-weight: bold; }
-    input[type="text"],
-    input[type="number"],
-    input[type="file"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      font-size: 15px;
-      background-color: rgba(255,255,255,0.9);
-      color: #000;
-    }
-    .btn {
-      width: 100%;
-      padding: 10px;
+      font-size: 2em;
       font-weight: bold;
-      font-size: 16px;
-      border-radius: 6px;
+    }
+    nav {
+      background: rgba(0,0,0,0.6);
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    nav button {
+      padding: 10px 20px;
       border: none;
-      background-color: #28a745;
+      border-radius: 8px;
+      background-color: #3498db;
       color: white;
       cursor: pointer;
-      margin-top: 10px;
+      transition: background-color 0.3s ease;
     }
-    .btn:hover { background-color: #218838; }
-    #addMessage {
-      text-align: center;
-      margin-top: 10px;
-      font-weight: bold;
-      color: yellow;
-      text-shadow: 0 0 2px #000;
+    nav button:hover {
+      background-color: #2980b9;
+    }
+    section {
+      margin: 20px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+      display: none;
+    }
+    h2 {
+      margin-top: 0;
+      border-bottom: 1px solid #00d1ff;
+      padding-bottom: 10px;
+      color: #00d1ff;
     }
     ul {
       list-style: none;
       padding: 0;
-      margin-top: 20px;
     }
     li {
-      background: rgba(255,255,255,0.9);
-      color: #000;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.1);
       padding: 10px;
       border-radius: 8px;
-      margin-bottom: 10px;
-      font-size: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
-    .images a {
-      margin-right: 10px;
-      color: #007bff;
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
+  <header>🛠️ لوحة التحكم - شركة أبو يحيى</header>
 
-  <div class="container">
-    <h1>إضافة سائق جديد</h1>
+  <nav>
+    <button onclick="showSection('drivers')">🚗 إدارة السائقين</button>
+    <button onclick="showSection('vehicles')">🛻 إدارة المركبات</button>
+    <button onclick="showSection('trips')">🗓️ إدارة الرحلات</button>
+    <button onclick="showSection('stats')">📊 الإحصائيات</button>
+    <button onclick="showSection('users')">🔐 المستخدمين</button>
+  </nav>
 
-    <form id="driverForm">
-      <div class="field"><label>👤 الاسم الكامل</label><input type="text" name="name" required /></div>
-      <div class="field"><label>📞 رقم الهاتف</label><input type="text" name="phone" required /></div>
-      <div class="field"><label>💼 الوظيفة</label><input type="text" name="job" required /></div>
-      <div class="field"><label>📄 صورة الهوية</label><input type="file" name="idPhoto" accept="image/*" required /></div>
-      <div class="field"><label>🚗 صورة الرخصة</label><input type="file" name="licensePhoto" accept="image/*" required /></div>
-      <div class="field"><label>🏷️ صورة كرت العمل</label><input type="file" name="workCardPhoto" accept="image/*" required /></div>
-      <div class="field"><label>👤 صورة شخصية للسائق</label><input type="file" name="personalPhoto" accept="image/*" required /></div>
-      <button type="submit" class="btn">➕ إضافة</button>
-      <div id="addMessage"></div>
-    </form>
+  <section id="drivers">
+    <h2>🚗 إدارة السائقين</h2>
+    <ul>
+      <li><form id="addDriverForm" style="margin-top: 15px;">
+  <input type="text" id="driverName" placeholder="اسم السائق" required>
+  <input type="text" id="driverPhone" placeholder="رقم الهاتف" required>
+  <input type="text" id="driverLicense" placeholder="رقم الرخصة" required>
+  <button type="submit">➕ إضافة</button>
+</form>
+<p id="driverMessage" style="margin-top: 10px; font-weight: bold;"></p></li>
+      <li>📋 عرض قائمة السائقين</li>
+      <li>✏️ تعديل بيانات السائق</li>
+      <li>🗑️ حذف سائق</li>
+    </ul>
+  </section>
 
-    <h1>📋 قائمة السائقين</h1>
-    <ul id="driverList">جارٍ التحميل...</ul>
-  </div>
+  <section id="vehicles">
+    <h2>🛻 إدارة المركبات</h2>
+    <ul>
+      <li>➕ تسجيل مركبة جديدة</li>
+      <li>📋 عرض حالة المركبات</li>
+      <li>🧭 تحديث موقع المركبة</li>
+      <li>🛠️ تسجيل صيانة</li>
+    </ul>
+  </section>
+
+  <section id="trips">
+    <h2>🗓️ إدارة الرحلات</h2>
+    <ul>
+      <li>➕ إنشاء رحلة جديدة</li>
+      <li>📍 تحديد نقطة الانطلاق والوصول</li>
+      <li>⏱️ تتبع وقت الرحلة</li>
+      <li>📌 ربط الرحلة بالسائق والمركبة</li>
+    </ul>
+  </section>
+
+  <section id="stats">
+    <h2>📊 عرض الإحصائيات</h2>
+    <ul>
+      <li>📈 عدد الرحلات الإجمالية</li>
+      <li>📉 أداء السائقين</li>
+      <li>🚘 المركبات النشطة والمعطّلة</li>
+    </ul>
+  </section>
+
+  <section id="users">
+    <h2>🔐 صلاحيات المستخدمين</h2>
+    <ul>
+      <li>👨‍💼 تعيين دور للمستخدم (مدير / سائق / مشرف)</li>
+      <li>🛑 إيقاف حساب مستخدم</li>
+      <li>🔄 تعديل البريد الإلكتروني أو كلمة المرور</li>
+    </ul>
+  </section>
 
   <script>
-    document.getElementById('driverForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const form = document.getElementById('driverForm');
-      const formData = new FormData(form);
-
-      const res = await fetch('/api/add-driver', {
-        method: 'POST',
-        body: formData
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => {
+        sec.style.display = "none";
       });
+      document.getElementById(id).style.display = "block";
+    }
+    window.onload = () => {
+      showSection('drivers');
+    };document.getElementById("addDriverForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-      if (res.ok) {
-        document.getElementById('addMessage').textContent = '✅ تم حفظ السائق بنجاح';
-        form.reset();
-        fetchDrivers();
-      } else {
-        document.getElementById('addMessage').textContent = '❌ فشل في حفظ السائق';
-      }
+  const name = document.getElementById("driverName").value;
+  const phone = document.getElementById("driverPhone").value;
+  const license = document.getElementById("driverLicense").value;
+
+  try {
+    const res = await fetch('https://abuyahya-server.onrender.com/api/drivers/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, license })
     });
 
-    async function fetchDrivers() {
-      const res = await fetch('/api/drivers');
-      const data = await res.json();
-      const list = document.getElementById('driverList');
-      list.innerHTML = '';
+    const data = await res.json();
 
-      data.forEach(driver => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <strong>👤 الاسم:</strong> ${driver.name}<br>
-          <strong>📞 الهاتف:</strong> ${driver.phone}<br>
-          <strong>💼 الوظيفة:</strong> ${driver.job}<br>
-          <div class="images">
-            <strong>📷 الصور:</strong>
-            <a href="/uploads/${driver.personalPhoto}" target="_blank">شخصية</a>
-            <a href="/uploads/${driver.licensePhoto}" target="_blank">رخصة</a>
-            <a href="/uploads/${driver.idPhoto}" target="_blank">هوية</a>
-            <a href="/uploads/${driver.workCardPhoto}" target="_blank">كرت العمل</a>
-          </div>
-        `;
-        list.appendChild(li);
-      });
+    if (res.ok) {
+      document.getElementById("driverMessage").innerText = "✅ تم إضافة السائق بنجاح";
+      e.target.reset();
+    } else {
+      document.getElementById("driverMessage").innerText = data.message || "❌ فشل في الإضافة";
     }
-
-    fetchDrivers();
+  } catch (err) {
+    document.getElementById("driverMessage").innerText = "⚠️ خطأ في الاتصال بالسيرفر";
+  }
+});
   </script>
-
 </body>
 </html>
