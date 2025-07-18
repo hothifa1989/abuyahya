@@ -34,4 +34,13 @@ app.get('/api/posts', (req, res) => {
 // تشغيل السيرفر
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
+});const Post = require('./models/Post');
+
+app.get('/api/posts', async (req, res) => {
+  try {
+    const posts = await Post.find();
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ message: 'خطأ في جلب المشاركات من قاعدة البيانات' });
+  }
 });
