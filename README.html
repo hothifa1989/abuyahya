@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مستند المشروع - README</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f7f7f7;
+      padding: 30px;
+      line-height: 1.8;
+      color: #333;
+    }
+    h1, h2 {
+      color: #006a4e;
+      text-align: center;
+    }
+    code, pre {
+      background-color: #eaeaea;
+      padding: 10px;
+      display: block;
+      border-radius: 8px;
+      direction: ltr;
+      text-align: left;
+      margin: 15px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    td, th {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #28a745;
+      color: white;
+    }
+    .note {
+      background-color: #fffbe6;
+      border: 1px solid #ffce00;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📘 مشروع إدارة السائقين</h1>
+  <p>نظام مبني على <strong>Node.js</strong> و <strong>MongoDB</strong> لإدارة معلومات السائقين بشكل بسيط وفعّال.</p>
+
+  <h2>✅ الميزات</h2>
+  <ul>
+    <li>إدخال معلومات السائق ورفع الصور</li>
+    <li>عرض قائمة السائقين مع الصور</li>
+    <li>زر حذف مباشر لأي سائق</li>
+    <li>نظام تسجيل دخول مبدئي</li>
+  </ul>
+
+  <h2>📁 هيكل المجلدات</h2>
+  <pre><code>
+abuyahya/
+├── backend/
+│   ├── server.js
+│   ├── models/
+│   │   └── Driver.js
+│   └── uploads/
+├── frontend/
+│   ├── login.html
+│   ├── dashboard.html
+│   └── drivers.html
+└── README.html
+  </code></pre>
+
+  <h2>🔧 التقنيات المستخدمة</h2>
+  <table>
+    <tr><th>التقنية</th><th>الاستخدام</th></tr>
+    <tr><td>Node.js</td><td>تشغيل السيرفر ومعالجة الطلبات</td></tr>
+    <tr><td>Express</td><td>إنشاء REST API للمشروع</td></tr>
+    <tr><td>MongoDB</td><td>تخزين معلومات السائقين</td></tr>
+    <tr><td>Mongoose</td><td>تعريف النموذج والربط مع MongoDB</td></tr>
+    <tr><td>Multer</td><td>رفع الصور إلى مجلد uploads</td></tr>
+    <tr><td>HTML / CSS / JS</td><td>تصميم الصفحات والتفاعل مع الواجهة</td></tr>
+  </table>
+
+  <h2>🚀 تشغيل المشروع</h2>
+  <ol>
+    <li>شغّل MongoDB محليًا</li>
+    <li>افتح الطرفية داخل مجلد <code>backend</code></li>
+    <li>شغّل السيرفر عبر الأمر:<br><code>node server.js</code></li>
+    <li>افتح المتصفح على الروابط التالية:</li>
+  </ol>
+  <ul>
+    <li>📥 تسجيل الدخول: <code>http://localhost:3010/login.html</code></li>
+    <li>➕ إدخال السائق: <code>http://localhost:3010/dashboard.html</code></li>
+    <li>📋 عرض السائقين: <code>http://localhost:3010/drivers.html</code></li>
+  </ul>
+
+  <h2>🔐 بيانات الدخول</h2>
+  <table>
+    <tr><th>اسم المستخدم</th><th>كلمة المرور</th></tr>
+    <tr><td>admin</td><td>1234</td></tr>
+  </table>
+
+  <div class="note">
+    ⛳️ ملاحظات:
+    <ul>
+      <li>الصور تُحفظ تلقائيًا داخل مجلد <code>uploads</code></li>
+      <li>زر "حذف" يُزيل السائق من MongoDB ويُحدّث الجدول مباشرة</li>
+      <li>التعديل والصلاحيات يمكن إضافتها لاحقًا بسهولة</li>
+    </ul>
+  </div>
+
+  <h2>👨‍💻 المؤلف</h2>
+  <p>تم التطوير بواسطة <strong>حذيفة</strong> بالتعاون مع <strong>Copilot</strong> من Microsoft ✨</p>
+
+</body>
+</html>
