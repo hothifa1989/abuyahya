@@ -1,93 +1,94 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>دخول السائق - شركة أبو يحيى</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تسجيل الدخول</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url('./background.jpg') no-repeat center center fixed;
+      background-image: url('background.jpg'); /* الخلفية من نفس مجلد الصفحة */
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      color: #fff;
     }
-    form {
-      background: rgba(0, 0, 0, 0.7);
+
+    .login-box {
       padding: 30px;
-      border-radius: 15px;
-      width: 300px;
+      width: 340px;
       text-align: center;
+      background: none;
     }
-    input, button {
+
+    h2 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 22px;
+      text-shadow: 0 0 3px #000;
+    }
+
+    input {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-    }
-    input {
-      background: #fff;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #fff;
+      font-size: 15px;
+      background-color: rgba(255,255,255,0.85);
       color: #000;
     }
+
     button {
-      background-color: #00c851;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
       color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
       cursor: pointer;
     }
+
     button:hover {
-      background-color: #007e33;
+      background-color: #0056b3;
     }
-    #msg {
-      margin-top: 15px;
-      font-weight: bold;
+
+    .error {
+      color: yellow;
+      margin-top: 10px;
+      font-size: 14px;
+      text-shadow: 0 0 2px #000;
     }
   </style>
 </head>
 <body>
-  <form id="driverLoginForm">
-    <h2>👷‍♂️ دخول السائق</h2>
-    <input type="text" id="driverName" placeholder="اسم السائق" required>
-    <input type="password" id="driverPass" placeholder="كلمة المرور" required>
-    <button type="submit">دخول</button>
-    <div id="msg"></div>
-  </form>
+
+  <div class="login-box">
+    <h2>تسجيل الدخول</h2>
+    <input type="text" id="username" placeholder="اسم المستخدم">
+    <input type="password" id="password" placeholder="كلمة المرور">
+    <button onclick="login()">دخول</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
 
   <script>
-    const correctDrivers = [
-      { name: "اويس حمادة", password: "1231" },
-      { name: "عبد الله جاد الله", password: "1232" },
-      { name: "عمر مشاهرة", password: "1233" },
-      { name: "احمد عدنان", password: "1234" },
-      { name: "محمد عطون", password: "1235" },
-      { name: "مهند مشاهرة", password: "1236" },
-      { name: "طارق مشاهرة", password: "1237" },
-      { name: "عمار أبو طير", password: "1238" },
-      { name: "مامون بكيرات", password: "1239" },
-      { name: "حمزة أبو طير", password: "12310" },
-      { name: "عبد الرحمن حمادة", password: "12311" },
-      { name: "عمر جاد الله", password: "12312" },
-      { name: "محمد يوسف", password: "12313" },
-      { name: "صلاح ربايعة", password: "12314" }
-    ];
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-    document.getElementById("driverLoginForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const name = document.getElementById("driverName").value.trim();
-      const pass = document.getElementById("driverPass").value.trim();
-      const driver = correctDrivers.find(d => d.name === name && d.password === pass);
-
-      if (driver) {
-        localStorage.setItem("userEmail", name);
-        window.location.href = "uploadDispatch.html";
+      if (username === 'admin' && password === 'AbuYahya_2025') {
+        window.location.href = 'dashboard.html';
       } else {
-        document.getElementById("msg").innerText = "❌ اسم أو كلمة مرور غير صحيحة";
+        document.getElementById('errorMsg').textContent = '❌ اسم المستخدم أو كلمة المرور غير صحيحة';
       }
-    });
+    }
   </script>
+
 </body>
 </html>
