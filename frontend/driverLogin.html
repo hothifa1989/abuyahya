@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>دخول السائق - شركة أبو يحيى</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('./background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #fff;
+    }
+    form {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+    }
+    input {
+      background: #fff;
+      color: #000;
+    }
+    button {
+      background-color: #00c851;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #007e33;
+    }
+    #msg {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <form id="driverLoginForm">
+    <h2>👷‍♂️ دخول السائق</h2>
+    <input type="text" id="driverName" placeholder="اسم السائق" required>
+    <input type="password" id="driverPass" placeholder="كلمة المرور" required>
+    <button type="submit">دخول</button>
+    <div id="msg"></div>
+  </form>
+
+  <script>
+    const correctDrivers = [
+      { name: "اويس حمادة", password: "1231" },
+      { name: "عبد الله جاد الله", password: "1232" },
+      { name: "عمر مشاهرة", password: "1233" },
+      { name: "احمد عدنان", password: "1234" },
+      { name: "محمد عطون", password: "1235" },
+      { name: "مهند مشاهرة", password: "1236" },
+      { name: "طارق مشاهرة", password: "1237" },
+      { name: "عمار أبو طير", password: "1238" },
+      { name: "مامون بكيرات", password: "1239" },
+      { name: "حمزة أبو طير", password: "12310" },
+      { name: "عبد الرحمن حمادة", password: "12311" },
+      { name: "عمر جاد الله", password: "12312" },
+      { name: "محمد يوسف", password: "12313" },
+      { name: "صلاح ربايعة", password: "12314" }
+    ];
+
+    document.getElementById("driverLoginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("driverName").value.trim();
+      const pass = document.getElementById("driverPass").value.trim();
+      const driver = correctDrivers.find(d => d.name === name && d.password === pass);
+
+      if (driver) {
+        localStorage.setItem("userEmail", name);
+        window.location.href = "uploadDispatch.html";
+      } else {
+        document.getElementById("msg").innerText = "❌ اسم أو كلمة مرور غير صحيحة";
+      }
+    });
+  </script>
+</body>
+</html>
