@@ -2,104 +2,90 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>تسجيل الدخول - شركة أبو يحيى للنقليات</title>
+  <title>دخول السائق - شركة أبو يحيى</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background: url('./background.jpg') no-repeat center center fixed;
       background-size: cover;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
       margin: 0;
-      color: #ffffff;
-    }
-    h1 {
-      font-size: 2.5em;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 10px 20px;
-      border-radius: 10px;
+      color: #fff;
     }
     form {
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.2);
       width: 300px;
+      text-align: center;
     }
-    input {
+    input, button {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
-      border: none;
+      margin: 10px 0;
       border-radius: 8px;
-      background: #ffffff;
+      border: none;
+    }
+    input {
+      background: #fff;
       color: #000;
     }
     button {
-      background: #3498db;
+      background-color: #00c851;
       color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      width: 100%;
       cursor: pointer;
     }
     button:hover {
-      background: #2980b9;
+      background-color: #007e33;
     }
-    #message {
-      margin-top: 20px;
+    #msg {
+      margin-top: 15px;
       font-weight: bold;
-      text-align: center;
-      background-color: rgba(0,0,0,0.5);
-      padding: 10px;
-      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>🚛 شركة أبو يحيى للنقليات</h1>
-
-  <form id="loginForm">
-    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-    <input type="password" id="password" placeholder="كلمة المرور" required>
-    <button type="submit">تسجيل الدخول</button>
+  <form id="driverLoginForm">
+    <h2>👷‍♂️ دخول السائق</h2>
+    <input type="text" id="driverName" placeholder="اسم السائق" required>
+    <input type="password" id="driverPass" placeholder="كلمة المرور" required>
+    <button type="submit">دخول</button>
+    <div id="msg"></div>
   </form>
 
-  <div id="message"></div>
-
   <script>
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    const correctDrivers = [
+      { name: "اويس حمادة", password: "1231" },
+      { name: "عبد الله جاد الله", password: "1232" },
+      { name: "عمر مشاهرة", password: "1233" },
+      { name: "احمد عدنان", password: "1234" },
+      { name: "محمد عطون", password: "1235" },
+      { name: "مهند مشاهرة", password: "1236" },
+      { name: "طارق مشاهرة", password: "1237" },
+      { name: "عمار أبو طير", password: "1238" },
+      { name: "مامون بكيرات", password: "1239" },
+      { name: "حمزة أبو طير", password: "12310" },
+      { name: "عبد الرحمن حمادة", password: "12311" },
+      { name: "عمر جاد الله", password: "12312" },
+      { name: "محمد يوسف", password: "12313" },
+      { name: "صلاح ربايعة", password: "12314" }
+    ];
+
+    document.getElementById("driverLoginForm").addEventListener("submit", function(e) {
       e.preventDefault();
+      const name = document.getElementById("driverName").value.trim();
+      const pass = document.getElementById("driverPass").value.trim();
+      const driver = correctDrivers.find(d => d.name === name && d.password === pass);
 
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-      try {
-        const res = await fetch('https://abuyahya-server.onrender.com/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-
-        const data = await res.json();
-
-        if (res.ok) {
-          document.getElementById('message').innerText = '✅ تم تسجيل الدخول بنجاح... جاري تحويلك';
-          setTimeout(() => {
-            window.location.href = "dashboard.html";
-          }, 2000);
-        } else {
-          document.getElementById('message').innerText = data.message || '❌ بيانات الدخول غير صحيحة';
-        }
-      } catch (err) {
-        document.getElementById('message').innerText = '⚠️ خطأ في الاتصال بالخادم';
+      if (driver) {
+        localStorage.setItem("userEmail", name);
+        window.location.href = "uploadDispatch.html";
+      } else {
+        document.getElementById("msg").innerText = "❌ اسم أو كلمة مرور غير صحيحة";
       }
     });
   </script>
